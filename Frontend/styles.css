@@ -24,17 +24,4 @@ th, td {
     text-align: center;
 }
 
-th {
-    background-color: #f4f4f4;
-}
-
-form {
-    display: flex;
-    flex-direction: column;
-    max-width: 300px;
-    margin: auto;
-}
-
-label, input, select, button {
-    margin: 5px 0;
-}
+th
