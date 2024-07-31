@@ -4,10 +4,14 @@ const bodyParser = require('body-parser');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const cors = require('cors');
+const path = require('path');
 
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
+
+// Serve static files from the frontend directory
+app.use(express.static(path.join(__dirname, '../frontend')));
 
 // Connect to MongoDB
 mongoose.connect('mongodb://localhost:27017/crypto-tracker', { useNewUrlParser: true, useUnifiedTopology: true });
@@ -100,6 +104,11 @@ app.post('/portfolio', authMiddleware, async (req, res) => {
   } catch (error) {
     res.status(500).send(error.message);
   }
+});
+
+// Serve the frontend HTML file for the root URL
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend', 'index.html'));
 });
 
 app.listen(3000, () => {
